@@ -1,0 +1,7 @@
+accessWidener v2 named
+
+accessible method net/minecraft/client/gui/hud/InGameHud shouldRenderExperience ()Z
+accessible class net/minecraft/client/gui/hud/InGameHud$HeartType
+accessible method net/minecraft/client/gui/hud/InGameHud drawHeart (Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/gui/hud/InGameHud$HeartType;IIZZZ)V
+accessible method net/minecraft/client/gui/hud/InGameHud$HeartType fromPlayerState (Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/client/gui/hud/InGameHud$HeartType;
+accessible method net/minecraft/client/gui/hud/InGameHud getRiddenEntity ()Lnet/minecraft/entity/LivingEntity;

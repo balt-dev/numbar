@@ -1,31 +1,33 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "numbar",
 	"version": "${version}",
-	"name": "Example mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Numbar",
+	"description": "Makes durability bars, progress bars, XP, etc. show numeric values!",
 	"authors": [
-		"Me!"
+		"baltdev"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/modid/icon.png",
+	"icon": "assets/numbar/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"xyz.numbar.NumbarMain"
 		],
 		"client": [
-			"com.example.ExampleModClient"
+			"xyz.numbar.NumbarClient"
+		],
+		"modmenu": [
+			"xyz.numbar.NumbarModMenuIntegration"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
 		{
-			"config": "modid.client.mixins.json",
+			"config": "numbar.client.mixins.json",
 			"environment": "client"
 		}
 	],
@@ -36,6 +38,8 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
-	}
+		"modmenu": "*",
+		"cloth-config": "*"
+	},
+	"accessWidener" : "numbar.accesswidener"
 }

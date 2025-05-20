@@ -1,9 +1,11 @@
 {
 	"required": true,
-	"package": "com.example.mixin.client",
+	"package": "xyz.numbar.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"DrawContextMixin",
+		"BossbarMixin",
+		"InGameHudMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
