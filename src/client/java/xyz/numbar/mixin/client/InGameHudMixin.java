@@ -17,6 +17,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profilers;
 import org.joml.Vector2i;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -105,12 +106,9 @@ public class InGameHudMixin {
 	}
 
 	@ModifyVariable(
-			method = "renderStatusBars(Lnet/minecraft/client/gui/DrawContext;)V",
-			at = @At(
-					value = "STORE",
-					ordinal = 0
-			),
-			name = "p"
+			method = "renderStatusBars", // The exact name of the method you provided
+			at = @At(value = "STORE", opcode = Opcodes.ISTORE),
+			index = 13
 	)
 	private int alignHearts(int originalPValue) {
 		return NumbarConfig.get().healthSettings.enabled ? 1 : originalPValue;
