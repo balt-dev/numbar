@@ -1,12 +1,12 @@
 package xyz.numbar.config;
 
 public class DisplaySettings {
-    public boolean enabled = true;
-    public DisplayCorner displayCorner = DisplayCorner.CENTER;
-    public boolean hasShadow = true;
-    public TextMode textMode = TextMode.NORMAL;
-    public int xOffset = 0;
-    public int yOffset = 0;
+    public boolean enabled;
+    public DisplayCorner displayCorner;
+    public boolean hasShadow;
+    public TextMode textMode;
+    public int xOffset;
+    public int yOffset;
 
     public DisplaySettings(boolean enabled, DisplayCorner displayCorner, boolean hasShadow, TextMode textMode) {
         this(enabled, displayCorner, hasShadow, textMode, 0, 0);

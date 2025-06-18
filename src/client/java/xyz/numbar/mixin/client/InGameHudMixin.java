@@ -2,6 +2,7 @@ package xyz.numbar.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -36,34 +37,6 @@ public class InGameHudMixin {
 	@Shadow @Final private static Identifier FOOD_FULL_TEXTURE;
 	@Shadow @Final private static Identifier FOOD_FULL_HUNGER_TEXTURE;
 	@Shadow @Final private static Identifier FOOD_EMPTY_TEXTURE;
-	private static final int XP_BAR_WIDTH = 182;
-	private static final int XP_BAR_HEIGHT = 5;
-
-	@Inject(at = @At("HEAD"), method = "renderExperienceLevel(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V")
-	private void drawXPPoints(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-		InGameHud self = (InGameHud) (Object) this;
-		ClientPlayerEntity player = MinecraftClient.getInstance().player;
-		if (self.shouldRenderExperience() && player.experienceLevel > 0) {
-			int x = (context.getScaledWindowWidth() - (XP_BAR_WIDTH - 2)) / 2;
-			int y = context.getScaledWindowHeight() - 31;
-
-			DisplaySettings newSettings = NumbarConfig.get().xpSettings.copy();
-			boolean border = newSettings.hasShadow;
-			newSettings.hasShadow = false;
-			String formattedText = "%d / %d".formatted((int) Math.floor(player.experienceProgress * player.getNextLevelExperience()), player.getNextLevelExperience());
-			Text text = Text.literal(formattedText);
-			if (border) {
-				NumbarGUIHelper.drawAnchoredText(context, MinecraftClient.getInstance().textRenderer, text, x-1, y, XP_BAR_WIDTH, XP_BAR_HEIGHT, 0xFF000000, newSettings);
-				NumbarGUIHelper.drawAnchoredText(context, MinecraftClient.getInstance().textRenderer, text, x+1, y, XP_BAR_WIDTH, XP_BAR_HEIGHT, 0xFF000000, newSettings);
-				NumbarGUIHelper.drawAnchoredText(context, MinecraftClient.getInstance().textRenderer, text, x, y-1, XP_BAR_WIDTH, XP_BAR_HEIGHT, 0xFF000000, newSettings);
-				NumbarGUIHelper.drawAnchoredText(context, MinecraftClient.getInstance().textRenderer, text, x, y+1, XP_BAR_WIDTH, XP_BAR_HEIGHT, 0xFF000000, newSettings);
-			}
-
-			NumbarGUIHelper.drawAnchoredText(
-				context, MinecraftClient.getInstance().textRenderer, text, x, y, XP_BAR_WIDTH, XP_BAR_HEIGHT, 0xFF80FF20, newSettings
-			);
-		}
-	}
 
 	@Unique
 	private static final int STATUS_BAR_WIDTH = 80;
@@ -101,7 +74,7 @@ public class InGameHudMixin {
 					x, yOffset - 1, STATUS_BAR_WIDTH - textWidth, STATUS_BAR_HEIGHT - textHeight
 			);
 
-			context.drawGuiTexture(RenderLayer::getGuiTextured, ARMOR_FULL_TEXTURE, anchor.x, anchor.y, 9, 9);
+			context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, ARMOR_FULL_TEXTURE, anchor.x, anchor.y, 9, 9);
 		}
 	}
 
@@ -156,6 +129,10 @@ public class InGameHudMixin {
 				x, y, STATUS_BAR_WIDTH - textWidth, STATUS_BAR_HEIGHT - textHeight
 		);
 
+		if (health + absorption <= 4) {
+			anchor.y += self.random.nextInt(2);
+		}
+
 		self.drawHeart(context, InGameHud.HeartType.CONTAINER, anchor.x, anchor.y - 1, player.getWorld().getLevelProperties().isHardcore(), false, false);
 		self.drawHeart(context, heartType, anchor.x, anchor.y - 1, player.getWorld().getLevelProperties().isHardcore(), false, false);
 	}
@@ -187,14 +164,17 @@ public class InGameHudMixin {
 				STATUS_BAR_WIDTH, STATUS_BAR_HEIGHT, 0xFFFFFFFF, hungerSettings
 		);
 
+		int x = left + hungerSettings.xOffset;
+		int y = top + hungerSettings.yOffset;
+
 		int textWidth = textRenderer.getWidth(text);
 
 		Vector2i anchor = hungerSettings.displayCorner.getPosition(
-			left, top, STATUS_BAR_WIDTH - textWidth, STATUS_BAR_HEIGHT - textRenderer.fontHeight
+			x, y, STATUS_BAR_WIDTH - textWidth, STATUS_BAR_HEIGHT - textRenderer.fontHeight
 		);
 
-		context.drawGuiTexture(RenderLayer::getGuiTextured, FOOD_EMPTY_TEXTURE, anchor.x, anchor.y, 9, 9);
-		context.drawGuiTexture(RenderLayer::getGuiTextured, drawnTexture, anchor.x, anchor.y, 9, 9);
+		context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, FOOD_EMPTY_TEXTURE, anchor.x, anchor.y, 9, 9);
+		context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, drawnTexture, anchor.x, anchor.y, 9, 9);
 	}
 
 	@Unique
@@ -233,7 +213,7 @@ public class InGameHudMixin {
 					left, top, STATUS_BAR_WIDTH - textWidth, STATUS_BAR_HEIGHT - textRenderer.fontHeight
 			);
 
-			context.drawGuiTexture(RenderLayer::getGuiTextured, AIR_TEXTURE, anchor.x, anchor.y, 9, 9);
+			context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, AIR_TEXTURE, anchor.x, anchor.y, 9, 9);
 		}
 	}
 }

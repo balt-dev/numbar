@@ -5,7 +5,8 @@
 	"client": [
 		"DrawContextMixin",
 		"BossbarMixin",
-		"InGameHudMixin"
+		"InGameHudMixin",
+		"BarMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

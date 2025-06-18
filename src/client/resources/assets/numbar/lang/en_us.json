@@ -1,4 +1,6 @@
 {
+  "text.autoconfig.numbar.title": "Mod Settings",
+
   "text.autoconfig.numbar.option.itemBarSettings": "Durability/Bundle Capacity",
   "text.autoconfig.numbar.option.cooldownSettings": "Cooldown",
   "text.autoconfig.numbar.option.bossbarSettings": "Bossbar",

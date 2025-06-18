@@ -6,7 +6,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import org.joml.Matrix3x2fStack;
 import org.joml.Vector2i;
+import org.joml.Vector3f;
 import xyz.numbar.config.DisplaySettings;
 import xyz.numbar.config.TextMode;
 
@@ -20,9 +22,9 @@ public class NumbarGUIHelper {
 
     public static void drawAnchoredText(DrawContext ctx, TextRenderer textRenderer, Text value, int x, int y, float z, int w, int h, int color, DisplaySettings settings) {
         if (!settings.enabled) return;
-        MatrixStack matrices = ctx.getMatrices();
-        matrices.push();
-        matrices.translate(0.0F, 0.0F, z);
+        Matrix3x2fStack matrices = ctx.getMatrices();
+        matrices.pushMatrix();
+        matrices.transform(new Vector3f(0.0F, 0.0F, z));
 
         settings.textMode = settings.textMode == null ? TextMode.NORMAL : settings.textMode;
 
@@ -45,6 +47,6 @@ public class NumbarGUIHelper {
 
         Vector2i anchor = settings.displayCorner.getPosition(x, y, w - textWidth, h - textHeight);
         ctx.drawText(textRenderer, newText, anchor.x, anchor.y, color, settings.hasShadow);
-        matrices.pop();
+        matrices.popMatrix();
     }
 }
