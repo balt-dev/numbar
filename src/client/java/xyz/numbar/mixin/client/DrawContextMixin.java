@@ -76,7 +76,7 @@ public class DrawContextMixin {
 	private void drawCooldown(ItemStack stack, int x, int y, CallbackInfo ci) {
 
 		NumbarConfig conf = NumbarConfig.get();
-		if (conf.itemBarSettings.enabled) {
+		if (conf.cooldownSettings.enabled) {
 			MinecraftClient client = MinecraftClient.getInstance();
 
 			ClientPlayerEntity clientPlayerEntity = client.player;

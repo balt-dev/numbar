@@ -6,7 +6,8 @@
 		"DrawContextMixin",
 		"BossbarMixin",
 		"InGameHudMixin",
-		"BarMixin"
+		"BarMixin",
+		"PlayerListHudMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

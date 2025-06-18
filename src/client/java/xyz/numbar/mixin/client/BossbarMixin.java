@@ -26,7 +26,7 @@ public class BossbarMixin {
 	private static final int BOSSBAR_WIDTH = 182;
 	private static final int BOSSBAR_HEIGHT = 5;
 
-	@Inject(at = @At("HEAD"), method = "renderBossBar(Lnet/minecraft/client/gui/DrawContext;IILnet/minecraft/entity/boss/BossBar;)V")
+	@Inject(at = @At("TAIL"), method = "renderBossBar(Lnet/minecraft/client/gui/DrawContext;IILnet/minecraft/entity/boss/BossBar;)V")
 	private void drawBossbar(DrawContext context, int x, int y, BossBar bossBar, CallbackInfo ci) {
 		NumbarGUIHelper.drawAnchoredText(
 			context,

@@ -9,6 +9,7 @@
   "text.autoconfig.numbar.option.armorSettings": "Armor",
   "text.autoconfig.numbar.option.hungerSettings": "Hunger",
   "text.autoconfig.numbar.option.breathSettings": "Breath",
+  "text.autoconfig.numbar.option.pingSettings": "Ping",
 
   "text.autoconfig.numbar.option.itemBarSettings.enabled": "Enabled?",
   "text.autoconfig.numbar.option.itemBarSettings.displayCorner": "Display Anchor",
@@ -65,5 +66,12 @@
   "text.autoconfig.numbar.option.breathSettings.hasShadow": "Shadow?",
   "text.autoconfig.numbar.option.breathSettings.textMode": "Display Font",
   "text.autoconfig.numbar.option.breathSettings.xOffset": "X Offset",
-  "text.autoconfig.numbar.option.breathSettings.yOffset": "Y Offset"
+  "text.autoconfig.numbar.option.breathSettings.yOffset": "Y Offset",
+
+  "text.autoconfig.numbar.option.pingSettings.enabled": "Enabled?",
+  "text.autoconfig.numbar.option.pingSettings.displayCorner": "Display Anchor",
+  "text.autoconfig.numbar.option.pingSettings.hasShadow": "Shadow?",
+  "text.autoconfig.numbar.option.pingSettings.textMode": "Display Font",
+  "text.autoconfig.numbar.option.pingSettings.xOffset": "X Offset",
+  "text.autoconfig.numbar.option.pingSettings.yOffset": "Y Offset"
 }

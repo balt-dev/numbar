@@ -29,6 +29,10 @@ public class NumbarConfig implements ConfigData {
             new DisplaySettings(true, DisplayCorner.LEFT, true, TextMode.NORMAL, 0, 1);
 
     @ConfigEntry.Gui.CollapsibleObject
+    public DisplaySettings pingSettings =
+            new DisplaySettings(true, DisplayCorner.RIGHT, true, TextMode.SMALL, 0, 0);
+
+    @ConfigEntry.Gui.CollapsibleObject
     public DisplaySettings armorSettings =
             new DisplaySettings(true, DisplayCorner.LEFT, true, TextMode.NORMAL);
 
